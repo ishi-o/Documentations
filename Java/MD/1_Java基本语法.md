@@ -18,15 +18,20 @@
 - 不同`.java`文件在同一个包体内，指的是它们处于同一个目录下，声明的`package`路径相同
 - 命名规范：所有包名均应小写
 
-### 外部包的类或接口的引用
+### 外部包的引用
 
 - 引用外部包的类或接口需要使用`import`关键字，用于减少包名冗余导致的可读性下降
 
   ```java
   import pkg1.pkg2.MyClass;     // 可快捷使用MyClass
-  import pkg1.*;                // 可快捷使用pkg1下的所有公有类或接口, 但不包含pkg2下的公有类或接口
+  import pkg1.*;                // 可快捷使用pkg1下的所有公有类或接口, 但不包含子包下的公有类或接口
   ```
-- 实践时，不推荐使用通配符`*`，推荐以下顺序引入：
+- 引用外部包的类的静态成员或静态方法时需要使用`import static`
+
+  ```java
+  import static java.lang.Math.*;
+  ```
+- 实践时，引入外部包类等情形不推荐使用通配符`*`，引用静态成员等可酌情使用，推荐按以下顺序引入：
 
   ```java
   import java.util.?;               // 先引入java标准库
@@ -119,7 +124,7 @@
 - `default`：实际上不存在这个关键字，当类或方法或属性没有显式地声明访问控制修饰符时，含有`default`权限，常称为**包级私有**，仅包内所有类可访问
 - `private`：可以修饰方法、属性，仅类内可访问
 
-### `static、abstract、final`
+### `static、abstract、final、record`
 
 - `static`：声明静态对象或方法或内部类，和`cpp`类似
 - `abstract`：声明抽象方法或抽象类，和`cpp`的`virtual`定义类似
@@ -136,7 +141,7 @@
   
   因为`final`修饰方法只代表该方法不能被重写，所以做不到`cpp`那样用一个类型声明可变或不可变对象
 
-  在`java`中，一个类要么是可变类，要么是不可变类，**不可变类的所有属性都是常量**，例如`String`就是典型的不可变类，不要把实例方法和引用赋值搞混：
+  在`java`中，一个类要么是可变类，要么是不可变类，**不可变类的所有属性都被`final`修饰且不提供`setter`方法**，例如`String`就是典型的不可变类，不要把实例方法和引用赋值搞混：
 
   ```java
   String s = "";    // 引用赋值
@@ -146,10 +151,19 @@
   ```
 
 - 重写后的方法的访问控制权不能比父类的该方法低
+- `record`关键字可用于修饰类，表示一个类是不可变类，自动添加`final`等修饰符、自动实现`equals(), hashCode()`方法、自动实现`getter`方法
 
 ### `synchronized、transient、volatile、sealed、permits`
 
-- 待补
+- `synchronized`用于同步
+- `transient`修饰表示无法被序列化
+- `volatile`修饰表示每次读写都对主存读写，但仍不能保证原子性
+- `sealed`和`permits`是`JDK 17`及以上提供的继承修饰符，与`final`相区分，`sealed`修饰的类只能被其`permits`的类继承
+
+  ```java
+  public sealed SuperClass permits SubClass {}
+  class SubClass extends SuperClass {}  // 允许
+  ```
 
 ### 标识符声明
 
@@ -225,12 +239,12 @@
   
   - 包内子类可以通过基类及其对象访问保护型方法，因为包内类能指向类及其对象的方法表，同时符合`protected`的范围
 
-## `java`的奇妙语法糖
+## `java`的语法糖
 
 - `java`不支持运算符重载，仅有部分特殊的类含有类似的语法糖(`String`支持`+`拼接，但没有`[]`运算符)
 - `java`不支持默认参数
-- `java`和`cpp`均支持函数重载，重载均要求方法名相同但参数列表不同
-- `java`和`cpp`均支持变长参数，`java`变长参数的语法如下：
+- `java`支持函数重载，重载要求方法名相同但参数列表不同
+- `java`支持变长参数，`java`变长参数的语法如下：
 
   ```java
   // paramList可以是零或多个String参数
@@ -240,7 +254,7 @@
 - `java`不支持多继承
 - `java`不支持常方法，`cpp`支持用`const`修复一个方法保证不能被非常量调用
 - `java`和`cpp`均支持类型自动推断，在`cpp`中是`auto`而在`java`中是`var`
-- `java`的`Type[]`整体表示一个数组类型
+- `java`的`Type[]`整体表示一个数组类型，元素的类型为指定的`Type`
 
 ## 结构型语句
 
@@ -249,5 +263,6 @@
 - `for(;;)-continue-break`
 - `for(type e : c)`语法糖
 - `try-catch-finally`
+- `try-with-resource`
 - `switch-case-break`
-- `switch-case -> {}`
+- `switch-case -> {yield}`
