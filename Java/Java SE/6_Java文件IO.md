@@ -131,7 +131,7 @@
 
   - `reset()`：设置当前的`position`为当前的`mark`
 
-  - **`flip()`**：设置`mark`为当前的`position`，再将`position`设置为`0`，相当于`buf.limit(buf.position()).position(0)`
+  - **`flip()`**：设置`limit`为当前的`position`，再将`position`设置为`0`，相当于`buf.limit(buf.position()).position(0)`
 
   - `rewind()`：设置`mark`为当前的`position`
 
