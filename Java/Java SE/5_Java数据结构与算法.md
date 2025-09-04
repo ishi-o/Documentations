@@ -140,7 +140,9 @@
 
     - `boolean equalsIgnoreCase(String)`：忽略大小写地判断两个`String`是否相等
 
-    - `byte[] getBytes()`：以默认编码转换为`byte[]`，`JVM`默认编码为`UTF-8`，一些`IDE`会偷偷修改默认编码集
+    - `byte[] getBytes()`：以默认编码转换为`byte[]`，`JVM`默认编码为操作系统的编码集
+    
+      可以传递字符集参数例如`getBytes("GBK")`或`getBytes("UTF-8")`解析为对应编码的字节数组，再用`new String(byte[], String charset)`转化为`String`对象
 
     - `int indexOf(s)`：找到字符或子串`s`的起始位置，找不到返回`-1`，诸如`indexOf(char)`或`indexOf(String)`，还可以加上`fromIndex`和`endIndex`参数
 
@@ -195,9 +197,10 @@
 
     在使用迭代器遍历时，一旦通过对象进行增删行为，调用迭代器的方法将抛出异常
 
-    因此应该使用迭代器的`remove()`删除元素
+    因此应该使用迭代器的`remove()`删除当前指向的元素
 
     当当前迭代器从未使用过`next()`或已经使用过`remove()`时，调用`remove()`将抛出`IllegalStateException`异常
+- `Iterator`以及集合框架是随着泛型的实现而出现的，传统的枚举器是`Enumeration`接口，现在已经很少使用
 - 通过非语法糖的方式遍历集合的方法如下(如果需要在遍历过程中删除元素)：
   
   ```java
