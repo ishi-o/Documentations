@@ -1,4 +1,4 @@
-package example.java.netprog;
+package demo.netprog;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

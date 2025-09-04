@@ -1,6 +1,8 @@
-package example.java.functionalprog;
+package demo.functionalprog;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.IntSupplier;
@@ -29,12 +31,12 @@ public class FunctionalProgramingDemo {
 
     public static void lambdaDemo() {
         // no lambda
-        Comparator<Integer> comp = new Comparator<>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1.compareTo(o2);
-            }
-        };
+        // Comparator<Integer> comp = new Comparator<>() {
+        //     @Override
+        //     public int compare(Integer o1, Integer o2) {
+        //         return o1.compareTo(o2);
+        //     }
+        // };
         // using lambda
         Comparator<Integer> compWithLambda = (o1, o2) -> {
             return o1.compareTo(o2);
@@ -65,6 +67,6 @@ public class FunctionalProgramingDemo {
         evenPositiveIntStream.boxed().toList();
         evenPositiveIntStream.boxed().collect(Collectors.toList());
         evenPositiveIntStream.boxed().collect(Collectors.toMap(e -> e, e -> e * e));
-        var s = evenPositiveIntStream.boxed().collect(Collectors.groupingBy(e -> e % 4));   // 通过K将e分类, 得到Map<K, List<T>>
+        Map<Integer, List<Integer>> s = evenPositiveIntStream.boxed().collect(Collectors.groupingBy(e -> e % 4));   // 通过K将e分类, 得到Map<K, List<T>>
     }
 }

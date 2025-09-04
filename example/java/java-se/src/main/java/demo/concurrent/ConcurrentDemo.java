@@ -1,4 +1,4 @@
-package example.java.concurrent;
+package demo.concurrent;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;

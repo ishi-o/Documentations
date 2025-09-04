@@ -1,4 +1,4 @@
-package example.java.oobase.heap;
+package demo.oobase.heap;
 
 public interface RankHeap<T> extends Heap<T> {
 

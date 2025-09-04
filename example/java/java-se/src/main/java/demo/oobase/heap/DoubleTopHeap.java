@@ -1,4 +1,4 @@
-package example.java.oobase.heap;
+package demo.oobase.heap;
 
 import java.util.Comparator;
 import java.util.NoSuchElementException;
@@ -20,7 +20,7 @@ public class DoubleTopHeap<T> extends AbstractRankHeap<T> {
     }
 
     /**
-     * 
+     *
      * @param rank
      * @param comp
      * @param compType true: 求第rank大元素, false: 求第rank小元素

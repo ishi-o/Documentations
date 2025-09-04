@@ -1,4 +1,4 @@
-package example.java.io;
+package demo.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
@@ -98,9 +99,9 @@ public class IODemo {
         // bytebuffer <-> charbuffer
         ByteBuffer bbuf = ByteBuffer.allocate(1024);
         try {
-            var cbuf = decoder.decode(bbuf);
+            CharBuffer cbuf = decoder.decode(bbuf);
             decoder.reset();
-            var bytebuf = encoder.encode(cbuf);
+            ByteBuffer bytebuf = encoder.encode(cbuf);
             encoder.reset();
         } catch (Exception e) {
         }

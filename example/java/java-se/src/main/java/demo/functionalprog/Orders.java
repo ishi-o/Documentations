@@ -1,4 +1,4 @@
-package example.java.functionalprog;
+package demo.functionalprog;
 
 import java.util.List;
 import java.util.Map;

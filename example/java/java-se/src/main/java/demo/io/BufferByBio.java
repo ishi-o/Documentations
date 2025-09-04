@@ -1,4 +1,4 @@
-package example.java.io;
+package demo.io;
 
 /**
  */
