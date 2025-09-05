@@ -22,6 +22,22 @@
 
   因为`Servlet`本质是一个`Web`应用，是`Servlet`容器向开发者暴露的规范接口，`Servlet`容器是更复杂的应用
 
+### `servlet`依赖
+
+```xml
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+    <version>4.0.1</version>
+</dependency>
+
+<dependency>
+    <groupId>jakarta.servlet</groupId>
+    <artifactId>jakarta.servlet-api</artifactId>
+    <version>6.1.0</version>
+</dependency>
+```
+
 ### `Servlet`接口与`HttpServlet`实现类
 
 - `Servlet`有三个重要方法：`init()`、`service()`、`destroy()`，由`Servlet`容器调用进行生命周期管理

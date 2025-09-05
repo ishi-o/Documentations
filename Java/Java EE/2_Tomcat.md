@@ -1,5 +1,22 @@
 ## `Tomcat`
 
+### 依赖
+
+```xml
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-core</artifactId>
+    <version>11.0.10</version>
+</dependency>
+
+<!-- 若用到jsp技术 -->
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-jasper</artifactId>
+    <version>11.0.10</version>
+</dependency>
+```
+
 ### 结构介绍
 
 - `Tomcat`是`Apache`开发的开源`Servlet`容器，其根目录一定是某个名为**`webapps`**的目录
@@ -22,12 +39,24 @@
 
 - `web.xml`应位于`webapps/WEB-INF`目录下，其中所有的配置会**覆盖注解形式的映射**
 
+- 声明为`webapp`：
+
+  ```xml
+  <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+
+  </web-app>
+  ```
+
 - 声明一个`Servlet`：
 
   ```xml
   <servlet>
       <servlet-name>Servlet_name</servlet-name>
       <servlet-class>类路径</servlet-class>
+      <init-param>
   </servlet>
   ```
 
@@ -38,6 +67,31 @@
       <servlet-name>Servlet_name</servlet-name>
       <url-pattern>/路径</url-pattern>
   </servlet-mapping>
+  ```
+
+- 初始化某个`Servlet`或某个`Filter`的参数：
+
+  ```xml
+  <init-param>
+    <param-name>param_name</param-name>
+    <param-value>xml文件、字符串等</param-value>
+  </init-param>
+  ```
+
+- 设置欢迎文件：
+
+  ```xml
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  ```
+
+- 设置`session`的生效时间
+
+  ```xml
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
   ```
 
 ### 注解映射
