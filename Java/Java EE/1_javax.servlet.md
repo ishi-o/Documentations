@@ -58,8 +58,10 @@
 
   - `setCharsetEncoding(String)`：设置解析的编码集
   - `String getParameter(String name)`：获取某个请求参数
+
+  这里的参数已经消除了`GET`、`POST`等不同请求方法的差异
   - `String getHeader(String name)`：获取某个请求头
-  - `getRequestDispatcher(String location)`：获取一个请求分发器，指向内部的另一个`URI`，通常会继续调用`RequestDispatcher`接口的`forward(req, resp)`内部转发
+  - `getRequestDispatcher(String location)`：获取一个请求分发器，指向内部的另一个`URI`，通常会继续调用`RequestDispatcher`接口的`forward(req, resp)`内部转发出去或`include(req, resp)`转发后回来
 
 - `HttpServletResponse`接口表示一个`HTTP`响应报文，常用方法如下：
 
@@ -78,19 +80,16 @@
 ### `Session`与`Cookie`
 
 - `Session`用于存储客户端的某种状态，能保证每个`Session`唯一，内部类似于一个`Map<String, Object>`
-
-- `HttpServletRequest`对象的`getSession()`方法会创建并返回一个`HttpSession`对象
+- `HttpServletRequest`对象的`getSession()`方法会(若不存在)创建并返回一个`HttpSession`对象，(若存在)直接返回`HttpSession`对象
 
   `getSession(false)`则不会创建，而只是返回已有的对象，若无则返回`null`
+- `HttpSession`实例的常用方法为`setAttribute(String, Object)`和`Object getAttribute(Stirng)`以及`removeAttribute(String)`
 
-- `HttpSession`实例的常用方法为`setAttribute(String, Object)`和`Object getAttribute(Stirng)`
-
-  分别为设置、获取其存储的对象数据
+  分别为设置、获取、删除其存储的对象数据
 
 ### `JSP`技术
 
 - `JSP`技术比较落后，了解即可
-
 - 由于`Servlet`本质是内嵌`HTML`的`Java`微服务程序，大量的`HTML`文本由一行行的输出流打印比较麻烦，因此`JSP`技术出现
 
   `JSP`本质也是一个`Servlet`应用，由`Web`服务器在启动时自动将其编译成`Servlet`程序并在服务器上运行
