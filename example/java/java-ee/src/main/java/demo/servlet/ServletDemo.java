@@ -13,24 +13,24 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet(urlPatterns = "/")
 public class ServletDemo extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
-        HttpSession session = req.getSession();
-        session.setAttribute("user", new Object());
-        Object obj = session.getAttribute("user");
-        resp.setContentType("text/html");
-        PrintWriter pw = resp.getWriter();
-        pw.write("<h1>Hello, world!</h1>");
-        pw.flush();
-    }
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		session.setAttribute("user", new Object());
+		Object obj = session.getAttribute("user");
+		resp.setContentType("text/html");
+		PrintWriter pw = resp.getWriter();
+		pw.write("<h1>Hello, world!</h1>");
+		pw.flush();
+	}
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        resp.sendRedirect("/");
-        // req.getRequestDispatcher("/").forward(req, resp);
-    }
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		resp.sendRedirect("/");
+		// req.getRequestDispatcher("/").forward(req, resp);
+	}
 
 }

@@ -12,6 +12,9 @@
     <modules>
         <module>java-se</module>
         <module>java-ee</module>
+        <module>spring-mvc</module>
+        <module>spring-boot</module>
+        <module>spring-core</module>
     </modules>
 
     <dependencyManagement>
