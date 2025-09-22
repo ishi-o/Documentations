@@ -71,13 +71,22 @@
   </servlet-mapping>
   ```
 
-- 初始化某个`Servlet`或某个`Filter`的参数：
+- 初始化某个`Servlet`或某个`Filter`的参数(`ServletConfig`)：
 
   ```xml
   <init-param>
     <param-name>param_name</param-name>
     <param-value>xml文件、字符串等</param-value>
   </init-param>
+  ```
+
+- 设置`ServletContext`的配置：
+
+  ```xml
+  <context-param>
+    <param-name>name</param-name>
+    <param-value>value</param-value>
+  </context-param>
   ```
 
 - 设置欢迎文件：
@@ -144,7 +153,7 @@
 
     该方法返回的`Wrapper`对象可链式调用`addMapping(String pattern)`，它等价于使用`Context`实例的`addServletMappingDecoded()`方法
 
-- 上下文类`Context`的实例方法：
+- 上下文类`Context`抽象的是整个`Web`容器，和`ServletContext`不同，一般作用于容器启动前，而后者作用于`Web`应用运行中处理业务，`Context`常用的实例方法有：
 
   - `addWelcomeFile(String)`：设置当客户端访问根路径时，返回的资源文件
   
