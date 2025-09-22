@@ -14,42 +14,42 @@ import demo.servlet.ServletDemo;
  */
 public class TomcatEmbedDemo {
 
-    public static void tomcatEmbedDemo() throws LifecycleException {
-        Tomcat tomcat = new Tomcat();
+	public static void tomcatEmbedDemo() throws LifecycleException {
+		Tomcat tomcat = new Tomcat();
+		tomcat.setHostname("localhost");
+		tomcat.setPort(8080);
+		tomcat.setBaseDir("/target/tomcat/");
 
-        tomcat.setHostname("localhost");
-        tomcat.setPort(8080);
-        tomcat.getConnector();
+		String contextPath = "/api";
+		// String docBase = new File("/src/main/webapp").getAbsolutePath();
+		String docBase = Path.of("/src/main/webapp").toAbsolutePath().toString();
+		Context context = tomcat.addContext(contextPath, docBase);
 
-        tomcat.setBaseDir("/target/tomcat/");
+		String servletName = "ServletDemo";
+		tomcat.addServlet(contextPath, servletName, new ServletDemo()).addMapping("/*");
+		// context.addServletMappingDecoded("/*", servletName);
 
-        String contextPath = "";
-        // String docBase = new File("/src/main/webapp").getAbsolutePath();
-        String docBase = Path.of("/src/main/webapp").toAbsolutePath().toString();
-        Context context = tomcat.addContext(contextPath, docBase);
+		FilterDef filterDef = new FilterDef();
+		filterDef.setFilter((req, resp, chain) -> {
+			// 过滤 ...
+			// 链式处理
+			chain.doFilter(req, resp);
+		});
+		filterDef.setFilterName("FilterDemo");
 
-        String servletName = "ServletDemo";
-        tomcat.addServlet(contextPath, servletName, new ServletDemo());
-        context.addServletMappingDecoded("/api/*", servletName);
+		FilterMap filterMap = new FilterMap();
+		filterMap.addURLPatternDecoded("/*");
+		filterMap.addServletName(servletName);
+		filterMap.setFilterName("FilterDemo");
 
-        FilterDef filterDef = new FilterDef();
-        filterDef.setFilter((req, resp, chain) -> {
-            // 过滤 ...
-            // 链式处理
-            chain.doFilter(req, resp);
-        });
-        filterDef.setFilterName("FilterDemo");
+		context.addFilterDef(filterDef);
+		context.addFilterMap(filterMap);
 
-        FilterMap filterMap = new FilterMap();
-        filterMap.addURLPatternDecoded("/*");
-        filterMap.addServletName(servletName);
-        filterMap.setFilterName("FilterDemo");
+		// tomcat.addWebapp("/api", "src/main/webapp");
 
-        context.addFilterDef(filterDef);
-        context.addFilterMap(filterMap);
-
-        tomcat.init();
-        tomcat.start();
-        tomcat.getServer().await();
-    }
+		tomcat.getConnector();
+		tomcat.init();
+		tomcat.start();
+		tomcat.getServer().await();
+	}
 }
