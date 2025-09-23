@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 *target
 .vscode
+=======
+*.ipynb
+>>>>>>> tmpRepoA/docs/add-pytorch-notes
