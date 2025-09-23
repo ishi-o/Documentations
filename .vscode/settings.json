@@ -1,0 +1,7 @@
+{
+<<<<<<< HEAD
+	"java.compile.nullAnalysis.mode": "automatic"
+=======
+    "python.analysis.autoImportCompletions": true
+>>>>>>> tmpRepoA/docs/add-pytorch-notes
+}
