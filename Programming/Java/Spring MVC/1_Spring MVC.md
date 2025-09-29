@@ -142,6 +142,7 @@
     ```java
     // 需实现WebMvcConfigurer接口(全部都有default实现, 因此可按需实现)
     @Configuration
+    @EnableWebMvc
     public class WebMvcConfig implements WebMvcConfigurer {
         private MyHandlerInterceptor interceptor;
 
