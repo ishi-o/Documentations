@@ -164,6 +164,30 @@
     ```
 
   - 基于`XML`配置：待补
+- `CORS`配置：`Spring MVC`的默认`CORS`策略是同源策略，即默认情况下，不允许被不同域访问(包括`localhost`的不同端口)，浏览器确认的具体做法是先发送预请求获取对方的`CORS`配置，然后限定只能发送或不能发送特定的请求
+- `@CrossOrigin`类/方法级注解就是用于配置`CORS`的，针对一个类，它会作用于该类的所有方法
+  - `origin`属性包括它允许的来源域
+  - `originPatterns`属性包括它允许被获取的`URI`
+  - `methods`属性包括它允许的请求方法
+  - `allowedHeaders`和`exposedHeaders`：允许/不允许请求所包含的请求头
+  - `maxAge`：秒为单位的`CORS`配置有效时间
+- 除了注解配置，还可以基于`Java`配置，仍然是`WebMvcConfigurer`的方法：
+  
+  ```java
+  @Configuration
+  @EnableWebMvc
+  public class WebMvcConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.allowedOrigins("localhost")
+                .addMappings("/api/**")
+                .allowedMethods("GET", "POST")
+                .allowedHeaders(HttpHeaders.LOCATION)
+                .exposedHeaders(HttpHeaders.ACCEPT)
+                .maxAge(3600);
+    }
+  }
+  ```
 
 ## 模型与视图
 
