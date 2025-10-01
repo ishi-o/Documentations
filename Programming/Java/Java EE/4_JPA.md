@@ -1,3 +1,9 @@
+
+---
+related:
+  - "[[../Java SE/10_Java数据库编程.md|Java 数据库编程]]"
+---
+
 # `Jakarta Persistence API`
 
 ## 介绍

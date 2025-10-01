@@ -1,3 +1,9 @@
+
+---
+related:
+  -   - "[[./1_基本语法.md|Python Note]]"
+---
+
 ### `pandas`介绍
 
 - `pandas`名字来源于`panel datas`，即面板数据
