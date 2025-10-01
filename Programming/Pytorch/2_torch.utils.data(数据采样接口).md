@@ -1,7 +1,6 @@
-
 ---
 related:
-  -   - "[[../Python/1_基本语法.md|Python Note]]"
+  - "[[../Python/1_基本语法.md|Python Note]]"
 ---
 
 ### 数据集集成框架
@@ -58,4 +57,3 @@ related:
 
   用户可以继承`Sampler`或以上这些特化的采样器类，来自定义一个`Sampler`
   不过大多数情况下，上述采样器已经足够了
-

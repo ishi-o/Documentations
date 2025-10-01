@@ -1,7 +1,6 @@
-
 ---
 related:
-  -   - "[[./1_Qt基础.md|Qt Base]]"
+  - "[[./1_Qt基础.md|Qt Base]]"
 ---
 
 # 数据库
@@ -70,38 +69,38 @@ related:
 
 ```sql
 # 查询列
-SELECT * FROM tableName;				# 查询整个表
-SELECT columnNameList FROM tableName;	# 查询特定列, 列间用逗号隔开
+SELECT * FROM tableName;    # 查询整个表
+SELECT columnNameList FROM tableName; # 查询特定列, 列间用逗号隔开
 
 # 查询时过滤记录
-SELECT DISTINCT ... ;					# DISTINCT: 查询后,自动去除完全重复的记录
-SELECT ... WHERE condition;				# WHERE condition: 按condition过滤记录
+SELECT DISTINCT ... ;     # DISTINCT: 查询后,自动去除完全重复的记录
+SELECT ... WHERE condition;    # WHERE condition: 按condition过滤记录
 
 # condition的编写: 在查询时, 若表达式返回真, 则加入查询结果
-# 格式									 返回真的情况
-columnName >/=/< value					# 和值比较
-columnName IS NULL						# 空值
-columnName BETWEEN val1 AND val2		# 介于val1, val2间的值
-columnName IN (val1, ...)				# 等于括号内任意值
-columnName LIKE val						# LIKE模糊查询
-columnName REGEXP val					# 正则表达式匹配
-columnName GLOB val						# SQLite支持GLOB匹配
+# 格式          返回真的情况
+columnName >/=/< value     # 和值比较
+columnName IS NULL      # 空值
+columnName BETWEEN val1 AND val2  # 介于val1, val2间的值
+columnName IN (val1, ...)    # 等于括号内任意值
+columnName LIKE val      # LIKE模糊查询
+columnName REGEXP val     # 正则表达式匹配
+columnName GLOB val      # SQLite支持GLOB匹配
 
 # condition语句编写
 # 括号优先级最高; 若不熟悉运算符的优先级, 可以直接打括号
-exp1 AND exp2							# 逻辑与
-exp1 OR exp2							# 逻辑或
-NOT exp									# exp的否定
+exp1 AND exp2       # 逻辑与
+exp1 OR exp2       # 逻辑或
+NOT exp         # exp的否定
 
 # 在condition后可添加ORDER BY语句, 表示按列排序
 # 默认为ASC(上到下升序), DESC为上到下降序
 # 若有复数个列, 则按顺序排序(可认为是先排最后列, 再排第一列)
 SELECT ... FROM ... WHERE ... ORDER BY columnNames ASC / DESC;
 # 例: 对下表查询SELECT * FROM table ORDER BY name, id; (先排id, 再排name)
-id	|	name	--->	id	|	name	--->	id	|	name
-3		a				1		b				2		a
-1		b				2		a				3		a
-2		a				3		a				1		b
+id | name ---> id | name ---> id | name
+3  a    1  b    2  a
+1  b    2  a    3  a
+2  a    3  a    1  b
 
 # 起别名:
 # 在查询语句中, 所有涉及表名、列名的语句, 可在名字后添加 AS 别名, 查询结果将使用别名
@@ -144,17 +143,18 @@ ALTER TABLE tableName CHANGE columnName newName;
 
 # 需要检查的情况(需要设置主键约束):
 # 记录不存在则插入、存在则更新
-INSERT OR REPLACE INTO ...		# SQLite
-REPLACE INTO ...				# MySQL
-INSERT IGNORE INTO ...			# 记录不存在则插入、存在则忽略操作
+INSERT OR REPLACE INTO ...  # SQLite
+REPLACE INTO ...    # MySQL
+INSERT IGNORE INTO ...   # 记录不存在则插入、存在则忽略操作
 ```
+
 ### 对表整体的操作
 
 ```sql
 # 创建表
 # 列名不是数据, 不用加引号
 CREATE TABLE tableName (
-	columnName dataType,			# 列名 该列的数据类型 逗号分隔开不同列
+ columnName dataType,   # 列名 该列的数据类型 逗号分隔开不同列
     ...
 );
 
@@ -171,40 +171,40 @@ ALTER TABLE tableName RENAME TO newName;
 DROP TABLE tableName;
 
 # 删除表的所有数据, 保留表
-TRUNCATE TABLE tableName;			# 一次性删除所有记录
-DELETE FROM tableName;				# 找出所有行, 逐个删除(DELETE还可用于删除特定行)
+TRUNCATE TABLE tableName;   # 一次性删除所有记录
+DELETE FROM tableName;    # 找出所有行, 逐个删除(DELETE还可用于删除特定行)
 ```
 
 ### 部分关键字
 
 ```sql
 # 创建/删除表时, 判断表是否不存在/存在:
-CREATE TABLE IF NOT EXISTS ...;			# 若表不存在, 才创建
-DROP TABLE IF EXISTS ...;				# 若表存在, 才删除
+CREATE TABLE IF NOT EXISTS ...;   # 若表不存在, 才创建
+DROP TABLE IF EXISTS ...;    # 若表存在, 才删除
 
 # 数据的约束(创建表时, 在数据类型后指定; 或者使用ALTER ... MODIFY修改)
-NOT NULL							# 该列数据一定非空
-UNIQUE								# 该列数据各不相同
-PRIMARY KEY							# 主键约束:该列数据各不相同, 且不为空
-DEFAULT value						# 插入记录时, 若未指定该列的值, 则使用默认值value
-AUTO_INCREMENT						# 用于整型的自动增长
-COMMENT								# 注释(放在最后)
+NOT NULL       # 该列数据一定非空
+UNIQUE        # 该列数据各不相同
+PRIMARY KEY       # 主键约束:该列数据各不相同, 且不为空
+DEFAULT value      # 插入记录时, 若未指定该列的值, 则使用默认值value
+AUTO_INCREMENT      # 用于整型的自动增长
+COMMENT        # 注释(放在最后)
 
 # 格式特殊的外键约束:
 # 用于绑定两表的两列, 本表是从表, otherTable是主表
 # 从表添加记录时, 外键约束列的数据必须存在于主表内
 # 从表删除记录时, 主表对应的记录不删除
-FOREIGN KEY	columnName REFERENCES otherTable(columnName) dataType;
+FOREIGN KEY columnName REFERENCES otherTable(columnName) dataType;
 # 外键约束的关键字:
-CASCADE		# 主表修改/删除记录时, 从表对应外键字段随之修改/删除, 常用
-RESTRICT	# 和CASCADE相反
-SET NULL	# 主表删除记录时, 从表对应外键字段设置为空
+CASCADE  # 主表修改/删除记录时, 从表对应外键字段随之修改/删除, 常用
+RESTRICT # 和CASCADE相反
+SET NULL # 主表删除记录时, 从表对应外键字段设置为空
 # 也可将修改和删除拆开:
 ON UPDATE CASCADE / ON DELETE CASCADE / ON UPDATE RESTRICT / ON DELETE RESTRICT
 
 # 可以在数据类型后指定, 也可以在后面批量设置约束:
 CREATE ... (
-	...,
+ ...,
     CONSTRAINT 约束名 UNIQUE (要添加的列)
 );
 ```
@@ -227,13 +227,13 @@ CREATE ... (
 
 ```c++
 // 以连接SQLite为例
-QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");	// 创建数据库对象
-db.setHostName("127.0.0.1");	// 设置主机名
-db.setPort(3306);				// 设置端口
-db.setUserName("root");			// 设置拥有者名
-db.setPassword("1");			// 设置密码
-db.setDatabase("mdb.db");		// 设置数据库路径; SQLite是一个.db文件
-db.open();						// 打开数据库
+QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE"); // 创建数据库对象
+db.setHostName("127.0.0.1"); // 设置主机名
+db.setPort(3306);    // 设置端口
+db.setUserName("root");   // 设置拥有者名
+db.setPassword("1");   // 设置密码
+db.setDatabase("mdb.db");  // 设置数据库路径; SQLite是一个.db文件
+db.open();      // 打开数据库
 
 // 含lastError()方法:返回该对象最近发生的错误, 若一切正常则返回空串
 ```
@@ -243,12 +243,12 @@ db.open();						// 打开数据库
 在`Qt`中，可直接利用`QSqlQuery`对象操作数据库
 
 ```c++
-QSqlQuery* query {new QSqlQuery(db)};		// 绑定QSqlDatabase对象即可
+QSqlQuery* query {new QSqlQuery(db)};  // 绑定QSqlDatabase对象即可
 query->exec("SQL语句");
 
 // 遍历查询结果
 while (query->next()) {
-    query->value(列名);		// 返回QVariant, 存储第i条记录中指定列的数据
+    query->value(列名);  // 返回QVariant, 存储第i条记录中指定列的数据
 }
 
 // 也含lastError()方法
@@ -270,23 +270,23 @@ while (query->next()) {
 // QTableView控件一般在QD中绘制, 这里假设它是ui->tv
 
 // 准备
-QSqlTableModel* model {new QSqlTableModel(this, db); }	// 指定父组件和数据库
-model->setEditStrategy(QSqlTableModel::OnManualSubmit);	// 一般要设置手动提交
-model->setTable("tableName");		// 模型要设置数据库的表的名称
-model->select();					// 将数据加载进模型
-ui->tv->setModel(model);			// 视图要绑定模型:表->模型->视图
+QSqlTableModel* model {new QSqlTableModel(this, db); } // 指定父组件和数据库
+model->setEditStrategy(QSqlTableModel::OnManualSubmit); // 一般要设置手动提交
+model->setTable("tableName");  // 模型要设置数据库的表的名称
+model->select();     // 将数据加载进模型
+ui->tv->setModel(model);   // 视图要绑定模型:表->模型->视图
 
 // 通过模型修改数据库
-model->index(int, int)				// 返回QModelIndex对象(0开始)
-	   rowCount() / columnCount()	// 返回当前行/列数
-       data(QModelIndex)			// 返回索引指向的数据(类型为QVariant)
-       removeRow(int)/removeColumn(int)	// 删除某行/列
-       submitAll()					// 提交所有修改(真正修改数据库)
-       revertAll()					// 撤销所有修改(停止事务)
+model->index(int, int)    // 返回QModelIndex对象(0开始)
+    rowCount() / columnCount() // 返回当前行/列数
+       data(QModelIndex)   // 返回索引指向的数据(类型为QVariant)
+       removeRow(int)/removeColumn(int) // 删除某行/列
+       submitAll()     // 提交所有修改(真正修改数据库)
+       revertAll()     // 撤销所有修改(停止事务)
     
 // 通过视图修改模型
-ui->tv->currentIndex()				// 返回QModelIndex, 表示用户选中的格子
-    	setCurrentIndex(QModelIndex)// 设置选中格
+ui->tv->currentIndex()    // 返回QModelIndex, 表示用户选中的格子
+     setCurrentIndex(QModelIndex)// 设置选中格
 // 模型调用方法后, 当前选中的信息可能丢失
     
 // 关于QVariant和QModelIndex:
@@ -320,7 +320,7 @@ public:
 
 // 令委托无视掉指定列的选中
 ReadOnlyDelegate* readOnlyDelegate = new ReadOnlyDelegate(this);
-for (auto i = 1; i < 3; ++i) {	// 无视
+for (auto i = 1; i < 3; ++i) { // 无视
     ui->matrixTable->setItemDelegateForColumn(i, readOnlyDelegate);
 }
 ```
@@ -333,22 +333,22 @@ for (auto i = 1; i < 3; ++i) {	// 无视
 
 ```c++
 // 准备
-...			// 构造函数、设置手动提交、视图和模型绑定 与上述一致
-ManageModel->setColumnCount(2);		// 设置模型共有两列
-ManageModel->setHorizontalHeaderLabels({"用户组", "组权限"});	// 设置这两列的名称
+...   // 构造函数、设置手动提交、视图和模型绑定 与上述一致
+ManageModel->setColumnCount(2);  // 设置模型共有两列
+ManageModel->setHorizontalHeaderLabels({"用户组", "组权限"}); // 设置这两列的名称
     
 // 例如要绘制二层的树结构, 表group和member如下:
 group:
-gid		grpname		power		memberCnt
+gid  grpname  power  memberCnt
     
 member:
-uid		grp_id[含group(gid)的外键约束]	username	pwd
+uid  grp_id[含group(gid)的外键约束] username pwd
 
 // 加载, 假设有QStandardItemModel对象的指针model:
 QSqlQuery group{db}, member{db};
 group.exec("SELECT gid, grpname FROM group");
 while (group.next()) {
-    QList<QStandardItem*> rowItems;	// 因设置了两列, 故插入的是链表
+    QList<QStandardItem*> rowItems; // 因设置了两列, 故插入的是链表
     auto tmpItem {new QStandardItem(qroup.value("grpname").toString())};
     // 树的第一层是 组名 和 组权限
     rowItems << tmpItem << new QStandardItem(group.value("power").toInt());
@@ -364,8 +364,8 @@ while (group.next()) {
 // 项一旦加入模型, 所有权将移交, 模型内存释放时所有项一同释放
 
 // 树形视图的方法:
-tv->expandAll()				// 展开所有项
-	collapseAII()			// 折叠所有项
+tv->expandAll()    // 展开所有项
+ collapseAII()   // 折叠所有项
 ```
 
 [树形视图的更多方法](https://blog.csdn.net/qq_40597070/article/details/131542928)

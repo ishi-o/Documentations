@@ -1,7 +1,6 @@
-
 ---
 related:
-  -   - "[[../Python/1_基本语法.md|Python Note]]"
+  - "[[../Python/1_基本语法.md|Python Note]]"
 ---
 
 ### `Tensor`(张量)
@@ -26,10 +25,10 @@ related:
     元组的长度表示张量的维度，元组的第`i`个元素表示这个维度上的元素个数，例如：
 
     ```python
-    tensor(1)			# Size([])		元组为空, 表示标量
-    tensor([1])			# Size([1])		元组长1, 表示一维、1个元素
-    tensor([1, 2])		# Size([2])		元组长1, 表示一维、2个元素
-    tensor([[1, 2]])	# Size([1, 2])	元组长2, 表示二维、一行两列
+    tensor(1)   # Size([])  元组为空, 表示标量
+    tensor([1])   # Size([1])  元组长1, 表示一维、1个元素
+    tensor([1, 2])  # Size([2])  元组长1, 表示一维、2个元素
+    tensor([[1, 2]]) # Size([1, 2]) 元组长2, 表示二维、一行两列
     ```
 
     可以用切片符获取`Size`元组的信息，和内置元组操作一致
@@ -47,22 +46,22 @@ related:
     否则，如果这个张量需要梯度、并且由其它张量运算得出，则不是叶子张量
 
     ```python
-    a = torch.tensor([1])						# 默认不需要梯度
-    b = torch.tensor([1], requires_grad=True)	# 需要梯度
+    a = torch.tensor([1])      # 默认不需要梯度
+    b = torch.tensor([1], requires_grad=True) # 需要梯度
     aa = a * 2
-    bb = b * 2		# requires_grad自动设置为True
-    # obj			is_leaf
-    # a				True
-    # b				True	需要梯度, 且由用户直接创建, 为叶子张量
-    # aa			True	不需要梯度, 为叶子张量
-    # bb			False	需要梯度, 但不由用户创建, 而是运算得出, 不是叶子张量
+    bb = b * 2  # requires_grad自动设置为True
+    # obj   is_leaf
+    # a    True
+    # b    True 需要梯度, 且由用户直接创建, 为叶子张量
+    # aa   True 不需要梯度, 为叶子张量
+    # bb   False 需要梯度, 但不由用户创建, 而是运算得出, 不是叶子张量
     ```
 
     开发者不需要过于关心`is_leaf`的值，但要知道，**只有`is_leaf=True`的张量的梯度会被保留**
     **`requires_grad`决定是否计算该张量的梯度、`is_leaf`决定一个张量的梯度是否释放**
     这是理所当然的，一般我们只需要权重、偏置张量的梯度，而不需要中间结点值的梯度
     <img src=".\pictures\Tensor_is_leaf.png" alt="Tensor_is_leaf" style="zoom:50%;" />
-    
+
   - `grad_fn`：布尔值，标记创建该张量的函数对象，所有叶子张量的`grad_fn`均为`None`
     如果这个张量需要梯度，且由其它张量运算得出，则`grad_fn`指向这个运算函数
 
@@ -79,12 +78,12 @@ related:
     `data`可以是列表、元组、`np`数组等，由`tensor()`挑选一个最适合的`dtype`作为元素类型
     如果将元组传递给`tensor()`，后续修改张量也没有影响，因为会转换为可读写张量
     允许用户自定义`dtype、device、requires_grad`，默认不需要梯度
-    
+
   - 浅拷贝：使用工厂函数`torch.as_tensor(data)`
     默认情况下，对于除`np`数组、张量以外的对象，和`tensor()`一致，**对于`np`数组以及张量，通过浅拷贝返回张量(前者调用`from_numpy()`)**
     但用户可以指定`dtype、device`，如果指定的这两个属性和`np`数组、张量这些默认进行浅拷贝行为的数据不一致，则进行深拷贝而不是浅拷贝
     <img src=".\pictures\Tensor_as_tensor.png" alt="Tensor_as_tensor" style="zoom:35%;" />
-    
+
   - 其它特殊的方式：
 
     - **`torch.detach(Tensor)`或`self.detach()`**：产生和原张量共享内存的新张量，这个新张量的`requires_grad=False`，但是对其数据的改动会影响原张量
@@ -124,11 +123,11 @@ related:
     ```python
     # 输出结果相同
     b = torch.tensor([[1, 2], [3, 4]], requires_grad=True, dtype=torch.float32)
-    c = b.pow(4)	# 向量
-    c.backward(torch.ones(c.shape))	# 初始权重系数全为1, 等效于单纯的求和
+    c = b.pow(4) # 向量
+    c.backward(torch.ones(c.shape)) # 初始权重系数全为1, 等效于单纯的求和
     print(b.grad)
     b.grad = None
-    d = b.pow(4).sum()	# 标量, 原向量单纯的求和
+    d = b.pow(4).sum() # 标量, 原向量单纯的求和
     d.backward()
     print(b.grad)
     ```
@@ -153,7 +152,7 @@ related:
 
     ```python
     # a是二维张量
-    a[0:2, 0:3]	  # 第一维度切0:2, 第二维度切0:3, 所以返回前两行、前三列围成的张量
+    a[0:2, 0:3]   # 第一维度切0:2, 第二维度切0:3, 所以返回前两行、前三列围成的张量
     ```
 
   - `add()、sub()、mul()、div()`对应`+、-、*、/`，为张量逐元素加减乘除
@@ -169,9 +168,9 @@ related:
 
     ```python
     a = torch.tensor([[1, 2],[3,4]])
-    m = a > 1		# 布尔张量 Tensor([[False,True],[True,True]])
-    a[m]			# 一维张量 Tensor([2, 3, 4])
-    a[m] = 1		# 支持原位赋值, 现在a为Tensor([[1,1],[1,1]])
+    m = a > 1  # 布尔张量 Tensor([[False,True],[True,True]])
+    a[m]   # 一维张量 Tensor([2, 3, 4])
+    a[m] = 1  # 支持原位赋值, 现在a为Tensor([[1,1],[1,1]])
     # a[m]=1和a=torch.where(a>1,1,a)效果一致,区别在于前者是原位赋值
 
   - `sum()、max()、min()、mean()、std()、var()`求张量的和、最大值、最小值、均值、标准差、方差

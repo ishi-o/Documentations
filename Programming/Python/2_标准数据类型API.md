@@ -1,7 +1,6 @@
-
 ---
 related:
-  -   - "[[./1_基本语法.md|Python Note]]"
+  - "[[./1_基本语法.md|Python Note]]"
 ---
 
 ### 不可变/可变类型

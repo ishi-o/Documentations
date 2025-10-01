@@ -1,4 +1,3 @@
-
 ---
 related:
   - "[[./1_Java基本语法.md|Java 基础]]"
@@ -112,7 +111,7 @@ related:
   private static final MAX_SIZE = 10;
   // Consumer
   synchronized (this) {
-      while (size == 0) {	// Condition: Empty
+      while (size == 0) { // Condition: Empty
           wait();
       }
       e = q.poll(); // consume
@@ -121,7 +120,7 @@ related:
   }
   // Provider
   synchronized (this) {
-      while (size == MAX_SIZE) {	// Condition: Full
+      while (size == MAX_SIZE) { // Condition: Full
           wait();
       }
       q.offer(e); // provide
@@ -171,7 +170,6 @@ related:
     返回`true`表示获取成功
 
   - `newCondition()`：返回一个`Condition`对象，`Lock`支持多条件锁，与`synchronized`单锁相区别
-
 
   `ReentrantLock`是`Lock`的实现类之一，译为“可重入锁”
 
@@ -339,4 +337,3 @@ related:
 - `ThreadLocal`
 
 - 虚拟线程：
-

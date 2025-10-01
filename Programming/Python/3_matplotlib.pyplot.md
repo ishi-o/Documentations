@@ -1,8 +1,6 @@
-本文讲述如何用`pyplot`将数据用图的形式显现出来，方便数据统计。当然，这里只讲述了部分用法，`matplotlib`还有其他模块有很多的功能，感兴趣可以自行了解
-
 ---
 related:
-  -   - "[[./1_基本语法.md|Python Note]]"
+  - "[[./1_基本语法.md|Python Note]]"
 ---
 
 
@@ -17,19 +15,19 @@ related:
 <p style="color: rgba(0, 0, 0, 0.2)" align="right">ishiooo</p>
 
 ```python
-import matplotlib.pyplot as plt		# 常用的是pyplot模块
+import matplotlib.pyplot as plt  # 常用的是pyplot模块
 import numpy as np
 
 # x,y可以是数字或字符串，为字符串时默认等距。
-x = np.linspace(1,10,500)	# linspace:在1-10区间内生成500个等距点,返回数组
-y = 2*x + 1					# 直线方程
+x = np.linspace(1,10,500) # linspace:在1-10区间内生成500个等距点,返回数组
+y = 2*x + 1     # 直线方程
 
-plt.figure()				# 创建新图,方便开多个figure
-# plt.figure(num=4)			  可以传数字参数num=?,空则默认按顺序命名
-# plt.figure(figsize=(5,6))	  自定义宽,高(但实际上可以用鼠标拉长)
-plt.title('a line')			# 图的名称
-plt.plot(x,y)				# 生成图,x轴数组为x,y轴数组为y
-plt.show()					# 将该图展现出来
+plt.figure()    # 创建新图,方便开多个figure
+# plt.figure(num=4)     可以传数字参数num=?,空则默认按顺序命名
+# plt.figure(figsize=(5,6))   自定义宽,高(但实际上可以用鼠标拉长)
+plt.title('a line')   # 图的名称
+plt.plot(x,y)    # 生成图,x轴数组为x,y轴数组为y
+plt.show()     # 将该图展现出来
 ```
 
 <img src="./pictures/plt_figure.png" style="zoom: 33%;" />
@@ -57,7 +55,7 @@ plt.figure()
 plt.plot(x,y)
 plt.plot(y,x,color='red',linestyle='--')# 默认蓝色,这里改为红色,虚线
 # linestyle可简写为ls,color可简写为c
-plt.plot(x,y,linestyle=(0,(1,2,3)))		# 元组定义线型
+plt.plot(x,y,linestyle=(0,(1,2,3)))  # 元组定义线型
 ```
 
 <img src="./pictures/plt_expFigure.png" style="zoom:33%;" />
@@ -105,9 +103,9 @@ plt.plot(x,y,linestyle=(0,(1,2,3)))		# 元组定义线型
 除了改变线型，`pyplot`还可以用`marker`更改**点的样式**
 
 ```python
-plt.plot(x,y,marker='o')	# 每个点用实心圆代替(但是线型还是直线)
-plt.plot(x,y,marker=r'$\alpha$',markersize=10,label='name')		# markersize可简写为ms
-plt.plot(x,y,marker='*',mec='r',mfc='k')	# mec设置点边框的颜色,mfc设置点内部颜色
+plt.plot(x,y,marker='o') # 每个点用实心圆代替(但是线型还是直线)
+plt.plot(x,y,marker=r'$\alpha$',markersize=10,label='name')  # markersize可简写为ms
+plt.plot(x,y,marker='*',mec='r',mfc='k') # mec设置点边框的颜色,mfc设置点内部颜色
 # mec:markeredgecolor, mfc:markerfacecolor
 ```
 
@@ -116,7 +114,7 @@ plt.plot(x,y,marker='*',mec='r',mfc='k')	# mec设置点边框的颜色,mfc设置
 可以用`fmt='[mk][line][color]'`参数快速设置点、线、色
 
 ```python
-plt.plot(x,y,fmt='o:k')		# 实心圆(点),虚线(线),黑色(色)
+plt.plot(x,y,fmt='o:k')  # 实心圆(点),虚线(线),黑色(色)
 ```
 
 <p style="color: rgba(0, 0, 0, 0.2)" align="right">ishiooo</p>
@@ -126,13 +124,13 @@ plt.plot(x,y,fmt='o:k')		# 实心圆(点),虚线(线),黑色(色)
 ### 设置坐标轴的值
 
 ```python
-plt.xlim((0,1))		# 限制x轴的范围
-plt.ylim((1,2))		# 限制y轴的范围(也可以用[]括起)
-plt.xlabel('label')	# 设定x轴的标签,即说明x轴是什么,同理可用plt.ylabel()设置y轴的标签
+plt.xlim((0,1))  # 限制x轴的范围
+plt.ylim((1,2))  # 限制y轴的范围(也可以用[]括起)
+plt.xlabel('label') # 设定x轴的标签,即说明x轴是什么,同理可用plt.ylabel()设置y轴的标签
 # loc属性:设置标签的位置,有right/left/center 默认center ---> title(),legend()都有该属性
 # ylabel的loc属性有top/bottom/center
 
-plt.xticks(np.linspace(0,1,5))	# 更改x轴的单位,默认每0.5为一个节点,这里设置为将0-1分割为5点
+plt.xticks(np.linspace(0,1,5)) # 更改x轴的单位,默认每0.5为一个节点,这里设置为将0-1分割为5点
 # 后面数组对应前面数组的值,可以改成自己需要的名称
 plt.xticks([0,1,5],['none','middle','pretty good'])
 ```
@@ -150,9 +148,9 @@ plt.xticks([0,1,5],['none','middle','pretty good'])
 需要用到`gca()`方法，全称`get current axis`，一般将返回的对象称为`ax`，以下是隐藏右轴及上轴的代码
 
 ```python
-ax = plt.gca()	# 获取前面这整张图的坐标轴,有上下左右四条轴
+ax = plt.gca() # 获取前面这整张图的坐标轴,有上下左右四条轴
 for i in ['right','top']:
-	ax.spines[i].set_color('none')	# 可以通过spines[]更改对应轴的属性
+ ax.spines[i].set_color('none') # 可以通过spines[]更改对应轴的属性
 ```
 
 四条轴分别为：`top,bottom,left,right`
@@ -160,7 +158,7 @@ for i in ['right','top']:
 需要移动坐标轴，则要用到`set_position()`方法，它接受元组参数，效果如下
 
 ```python
-ax.spines['left'].set_position(('data',0))	# 将y轴移动到x=0的位置
+ax.spines['left'].set_position(('data',0)) # 将y轴移动到x=0的位置
 ```
 
 <img src="./pictures/plt_spines.png" style="zoom:33%;" />
@@ -169,7 +167,7 @@ ax.spines['left'].set_position(('data',0))	# 将y轴移动到x=0的位置
 
 ```python
 for i in ['left','bottom']:
-	ax.spines[i].set_position(('data',0))
+ ax.spines[i].set_position(('data',0))
 ```
 
 ## 网格线
@@ -177,7 +175,7 @@ for i in ['left','bottom']:
 可用`grid`方法设置网格线：
 
 ```python
-plt.grid(None,which='major',axis='both',...)	# 其它参数和设置线型时类似
+plt.grid(None,which='major',axis='both',...) # 其它参数和设置线型时类似
 ```
 
 - `None`：是否显示网格线，如果后面接了其它参数，则默认为1，可设置为0
@@ -198,10 +196,10 @@ plt.grid(None,which='major',axis='both',...)	# 其它参数和设置线型时类
 子图里可以改变图的投影类型，如：
 
 ```python
-plt.figure()								# 创建画布,或:
-fig = plt.figure()							# 将画布赋给fig
-ax = plt.subplot(111,projection='polar')	# 极坐标投影,或:
-ax = plt.subplot(111,polar=1)				# 等效
+plt.figure()        # 创建画布,或:
+fig = plt.figure()       # 将画布赋给fig
+ax = plt.subplot(111,projection='polar') # 极坐标投影,或:
+ax = plt.subplot(111,polar=1)    # 等效
 ```
 
 其它投影类型还有：
@@ -216,7 +214,7 @@ ax = plt.subplot(111,polar=1)				# 等效
 注意到这个`fig`对象，它让切分画布变得便利：
 
 ```python
-ax1 = fig.add_subplot(111)			# 将左上角的区域切分出来
+ax1 = fig.add_subplot(111)   # 将左上角的区域切分出来
 ```
 
 ### `subplots`
@@ -226,7 +224,7 @@ ax1 = fig.add_subplot(111)			# 将左上角的区域切分出来
 它利用`subplots`返回画布和图对象，通过**改变对象的属性**，进行对特定画布中特定部分的修改：
 
 ```python
-fig, ax = plt.subplots()		# 返回画布,图数组(这里没给参数,默认生成一张图)
+fig, ax = plt.subplots()  # 返回画布,图数组(这里没给参数,默认生成一张图)
 ax.plot(x,y)
 ```
 
@@ -239,7 +237,7 @@ ax.plot(x,y)
 此外，还可以设置共享轴与投影形式：
 
 ```python
-fig,(ax1,ax2) = plt.subplots(1,2,sharex=1,sharey=1)	# 1即所有子图共享,0即所有子图独立
+fig,(ax1,ax2) = plt.subplots(1,2,sharex=1,sharey=1) # 1即所有子图共享,0即所有子图独立
 # 改变图形与subplot不同,需要将参数转换为字典传进去
 fig,ax3 = plt.subplots(1,1,subplot_kw=dict(projection='polar'))
 fig,ax3 = plt.subplots(1,1,subplot_kw=dict(polar=1))
@@ -250,14 +248,14 @@ fig,ax3 = plt.subplots(1,1,subplot_kw=dict(polar=1))
 其它设置与函数作图类似但部分有所不同：
 
 ```python
-fig,axs = plt.subplots(2,2)						# 两行两列,返回数组,用坐标访问
-axs[0,0].set_title('titleName')					# 标题
-axs[0,0].plot(x,y,lw=1,c='r',marker='*',...)	# plot
-axs[0,0].set_xticks(array)						# 轴的单位
-axs[0,0].set_xlim(-1,1)							# 轴的范围
-axs[0,0].spines['right'].set_color('none')		# 隐藏轴
-axs[0,0].axis('off')							# 隐藏所有轴,可以用xaxis/yaxis
-axs[0,0]1.set_xlabel('labelName')				# 给x轴加标注
+fig,axs = plt.subplots(2,2)      # 两行两列,返回数组,用坐标访问
+axs[0,0].set_title('titleName')     # 标题
+axs[0,0].plot(x,y,lw=1,c='r',marker='*',...) # plot
+axs[0,0].set_xticks(array)      # 轴的单位
+axs[0,0].set_xlim(-1,1)       # 轴的范围
+axs[0,0].spines['right'].set_color('none')  # 隐藏轴
+axs[0,0].axis('off')       # 隐藏所有轴,可以用xaxis/yaxis
+axs[0,0]1.set_xlabel('labelName')    # 给x轴加标注
 ```
 
 ## 其它图形
@@ -273,8 +271,8 @@ axs[0,0]1.set_xlabel('labelName')				# 给x轴加标注
   ```python
   # c=y,则y的数值大小可以清晰地映射到颜色条上
   plt.scatter(x,y,c=y,cmap='viridis')
-  plt.colorbar()											# 函数作图
-  ax.figure.colorbar(ax.scatter(x,y,c=y,cmap='viridis'))	# 对象作图
+  plt.colorbar()           # 函数作图
+  ax.figure.colorbar(ax.scatter(x,y,c=y,cmap='viridis')) # 对象作图
   ```
 
   其它可选调色盘：
@@ -344,9 +342,9 @@ axs[0,0]1.set_xlabel('labelName')				# 给x轴加标注
 
 ```python
 plt.figure()
-ax1 = plt.subplot2grid((2,2),(0,0))	# 将画布切分为2行2列,并把(0,0)网格返回给ax对象
-ax2 = plt.subplot2grid((2,2),(1,0),colspan=2)	# ax2占满第二行
-ax3 = plt.subplot2grid((2,2),(1,1),rowspan=2)	# ax3占满第二列
+ax1 = plt.subplot2grid((2,2),(0,0)) # 将画布切分为2行2列,并把(0,0)网格返回给ax对象
+ax2 = plt.subplot2grid((2,2),(1,0),colspan=2) # ax2占满第二行
+ax3 = plt.subplot2grid((2,2),(1,1),rowspan=2) # ax3占满第二列
 ```
 
 也可以用`matplotlib.gridspec`模块实现：
@@ -354,7 +352,7 @@ ax3 = plt.subplot2grid((2,2),(1,1),rowspan=2)	# ax3占满第二列
 ```python
 import matplotlib.gridspec as gridspec
 plt.figure()
-gs = gridspec.GridSpec(3,3)		# 将画布切分成3行3列
+gs = gridspec.GridSpec(3,3)  # 将画布切分成3行3列
 ax1 = plt.subplot(gs[0,0])
 ax2 = plt.subplot(gs[1:,1])
 ax3 = plt.subplot(gs[-1,-1])
@@ -369,7 +367,7 @@ ax3 = plt.subplot(gs[-1,-1])
 
 ```python
 gs1 = gridspec.GridSpec(3,3)
-gs1.update(left=0,right=0.5)	# 限定gs1网格只占画布的左边
+gs1.update(left=0,right=0.5) # 限定gs1网格只占画布的左边
 ```
 
 其它参数：
@@ -383,7 +381,7 @@ gs1.update(left=0,right=0.5)	# 限定gs1网格只占画布的左边
 需要在开头加上：
 
 ```python
-plt.rcParams["font.family"]="SimHei"	# 将字体名称设置为"SimHei"(黑体)
+plt.rcParams["font.family"]="SimHei" # 将字体名称设置为"SimHei"(黑体)
 ```
 
 关于其它字体的设置：[链接](https://blog.csdn.net/qq_35240689/article/details/130924160)
@@ -397,8 +395,8 @@ plt.rcParams["font.family"]="SimHei"	# 将字体名称设置为"SimHei"(黑体)
 通过这个方法可以让刻度线消失：
 
 ```python
-ax.tick_params(length=0)	# 直接设置刻度线的长度,或
-ax.tick_params(bottom=0)	# 不显示底轴的刻度线
+ax.tick_params(length=0) # 直接设置刻度线的长度,或
+ax.tick_params(bottom=0) # 不显示底轴的刻度线
 ```
 
 ## 实例

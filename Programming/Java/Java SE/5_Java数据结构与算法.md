@@ -1,4 +1,3 @@
-
 ---
 related:
   - "[[./1_Java基本语法.md|Java 基础]]"
@@ -64,7 +63,7 @@ related:
 
   - 常用静态成员：
     - `MAX_VALUE`和`MIN_VALUE`
-    
+
     - `NaN`：不是一个数
 
     - `POSITIVE_INFINITY`和`NEGETIVE_INFINITY`：正负无穷
@@ -147,7 +146,7 @@ related:
     - `boolean equalsIgnoreCase(String)`：忽略大小写地判断两个`String`是否相等
 
     - `byte[] getBytes()`：以默认编码转换为`byte[]`，`JVM`默认编码为操作系统的编码集
-    
+
       可以传递字符集参数例如`getBytes("GBK")`或`getBytes("UTF-8")`解析为对应编码的字节数组，再用`new String(byte[], String charset)`转化为`String`对象
 
     - `int indexOf(s)`：找到字符或子串`s`的起始位置，找不到返回`-1`，诸如`indexOf(char)`或`indexOf(String)`，还可以加上`fromIndex`和`endIndex`参数

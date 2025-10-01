@@ -1,4 +1,3 @@
-
 ---
 related:
   - "[[./1_Java基本语法.md|Java 基础]]"
@@ -185,8 +184,6 @@ related:
 
 ### `java.nio.charset`
 
-
-
 ## `nio2`
 
 ### `AsynchronousChannel`
@@ -234,10 +231,8 @@ related:
 
 - `move(Path, Path, CopyOption...)`：移动文件，默认行为为非原子性地移动文件内容到未存在文件，若为软链接则复制软链接本身
 
-- 
+-
 
 ### `java.nio.file.attribute`
-
-
 
 ### `PathMatcher`
