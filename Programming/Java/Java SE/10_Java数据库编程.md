@@ -1,3 +1,10 @@
+
+---
+related:
+  - "[[./1_Java基本语法.md|Java 基础]]"
+  - "[[../../SQL/标准SQL.md|SQL Note]]"
+---
+
 # `Java`数据库编程
 
 ## 传统`JDBC`编程

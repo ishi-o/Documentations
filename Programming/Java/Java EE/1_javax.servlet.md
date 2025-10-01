@@ -1,3 +1,12 @@
+---
+tags:
+  - JavaEE
+  - Servlet
+related:
+  - "[[../Java SE/9_Java网络编程.md|Java 网络编程基础]]"
+  - "[[./2_Tomcat.md|Tomcat]]"
+---
+
 ## `javax.servlet`
 
 ### `Java EE`介绍

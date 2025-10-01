@@ -1,3 +1,9 @@
+
+---
+related:
+  - "[[./1_Java基本语法.md|Java 基础]]"
+---
+
 ## `Java`多线程编程
 
 ### `Runnable`接口
