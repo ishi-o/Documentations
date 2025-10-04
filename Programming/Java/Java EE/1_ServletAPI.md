@@ -33,19 +33,23 @@ related:
 
 ### `servlet`依赖
 
-```xml
-<dependency>
-    <groupId>javax.servlet</groupId>
-    <artifactId>javax.servlet-api</artifactId>
-    <version>4.0.1</version>
-</dependency>
+- 接口依赖：
 
-<dependency>
-    <groupId>jakarta.servlet</groupId>
-    <artifactId>jakarta.servlet-api</artifactId>
-    <version>6.1.0</version>
-</dependency>
-```
+  ```xml
+  <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+  </dependency>
+
+  <dependency>
+      <groupId>jakarta.servlet</groupId>
+      <artifactId>jakarta.servlet-api</artifactId>
+      <version>6.1.0</version>
+  </dependency>
+  ```
+
+- `Servlet`接口的实现由`Web`容器提供，可以使用`provided`表示仅编译时需要
 
 ### `Servlet`接口与`HttpServlet`实现类
 

@@ -1,7 +1,7 @@
 ---
 related:
   - "[[../SpringCore/1_IoC容器.md|Spring IoC Note]]"
-  - "[[../Java EE/1_javax.servlet.md|Jakarta EE Servlet API Note]]"
+  - "[[../Java EE/1_ServletAPI.md|Jakarta EE Servlet API Note]]"
   - "[[../Java EE/2_Tomcat.md|Tomcat]]"
 tags:
   - SpringMVC

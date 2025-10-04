@@ -1,4 +1,4 @@
 ---
 related:
-  - "[[./1_javax.servlet.md|Servlet API]]"
+  - "[[./1_ServletAPI.md|Servlet API]]"
 ---

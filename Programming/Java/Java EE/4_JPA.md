@@ -11,6 +11,25 @@ related:
 - 单纯引入`JPA`是没用的，其著名实现有`Hibernate`等，
 - `Spring Data JPA`不是`JPA`的实现，而是基于`JPA`的一套`Repository`接口
 - `JPA`定义了一套`ORM`框架，使`POJO`得以和关系联系起来
+- 接口依赖：
+
+  ```xml
+  <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+      <version>3.2.0</version>
+  </dependency>
+  ```
+
+- `hibernate`实现依赖：
+
+  ```xml
+  <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>6.1.4.Final</version>
+  </dependency>
+  ```
 
 ## 核心组件
 
@@ -286,5 +305,7 @@ related:
 - `SIZE(collection)`：获取集合的大小，是`COUNT()`加子查询的便捷版
 - `obj MEMBER OF collection`：类似`IN`
 - `collection IS EMPTY`：等价于`SIZE(collection) = 0`
+
+## `Criteria API`
 
 ## `JPA`生命周期
