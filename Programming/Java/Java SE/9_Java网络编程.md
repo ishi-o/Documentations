@@ -1,3 +1,8 @@
+---
+related:
+  - "[[./1_Java基本语法.md|Java 基础]]"
+---
+
 ## 网络编程基础
 
 ### `TCP`客户端
@@ -86,12 +91,12 @@
 
     ```java
     HttpClient client = HttpClient.newBuilder()
-         .version(Version.HTTP_2)					// HTTP版本
-         .followRedirects(Redirect.NORMAL)			// 重定向策略
-         .connectTimeout(Duration.ofSeconds(20))	// 超时时长
-         .proxy(ProxySelector.of(new InetSocketAddress("proxy.example.com", 80)))	// 正向代理
-         .authenticator(Authenticator.getDefault())	// HTTP身份认证
-         .build();	// 返回由该Builder构造的HttpClient对象
+         .version(Version.HTTP_2)     // HTTP版本
+         .followRedirects(Redirect.NORMAL)   // 重定向策略
+         .connectTimeout(Duration.ofSeconds(20)) // 超时时长
+         .proxy(ProxySelector.of(new InetSocketAddress("proxy.example.com", 80))) // 正向代理
+         .authenticator(Authenticator.getDefault()) // HTTP身份认证
+         .build(); // 返回由该Builder构造的HttpClient对象
     ```
 
     其中`Redirect`与`Authenticator`是`HttpClient`的内部枚举，包含一系列重定向策略与身份认证策略
@@ -123,8 +128,6 @@
   - `version()、uri()、request()`：更多获取信息的方法
 
 ### 异步网络编程
-
-
 
 ### 了解`RMI`
 

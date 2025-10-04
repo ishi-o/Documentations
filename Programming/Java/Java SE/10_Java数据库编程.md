@@ -1,3 +1,9 @@
+---
+related:
+  - "[[./1_Java基本语法.md|Java 基础]]"
+  - "[[../../SQL/标准SQL.md|SQL Note]]"
+---
+
 # `Java`数据库编程
 
 ## 传统`JDBC`编程
@@ -8,6 +14,7 @@
 - `Driver`接口是驱动类，所有实现了这个接口的驱动类会在静态加载时将其本身注册到`DriverManager`类中(用一个写时拷贝的`CopyOnWriteArrayList`管理)
 - `DriverManager`接口是驱动的管理器，用于创建一个连接
 - `Conection`是用于管理一个数据库连接的
+
 - ```java
   Class.forName("数据库驱动主类名");
   Connectoin conn = DriverManager.getConnection("连接url");

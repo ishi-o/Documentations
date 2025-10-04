@@ -1,3 +1,8 @@
+---
+related:
+  - "[[./1_基本语法.md|Python Note]]"
+---
+
 ### `pandas`介绍
 
 - `pandas`名字来源于`panel datas`，即面板数据
@@ -30,7 +35,7 @@
   - `shape`：`Series`对象的形状，`Series`永远将`data`视为一维结构，即使传递一个二维数组
 - `Series`实例方法：
   - `describe()`：返回`Series`对象，包含原对象的各种统计数据，包括`'count', 'mean', 'std', 'min', 'max'`
-    
+
     也可以通过调用原对象的`count()`、`mean()`方法直接获取单个统计数据，其中`sum(), cov(), corr()`等是`describe()`没有涉及到的
   - `unique()`：返回去重后的`numpy`数组
 
@@ -43,7 +48,7 @@
   - `to_list()`和`to_frame()`：转化为原生列表和`DataFrame`对象
 
   - `loc`和`iloc`：`pandas`支持切片语法，同时提供了另一种索引方法`loc(line of code)`，通过`loc[label]`或`iloc[index]`可以更清晰地表示索引，它们和原生索引的最明显**区别是`:`切片符是双闭切片**
-    
+
     无论是原生切片符还是`loc`切片，`Series`对象都同样支持条件过滤，而且它实现了一般的运算符重载，均为逐元素运算，同`numpy`数组一样在运算时会自动对齐
 
   - `cumsum(), cumprod(), cummax(), cummin()`：返回前缀求和/求积/取最大/取最小处理后的`Series`对象
