@@ -1,3 +1,13 @@
+---
+related:
+  - "[[../SpringCore/1_IoC容器.md|Spring IoC Note]]"
+  - "[[../Java EE/1_ServletAPI.md|Jakarta EE Servlet API Note]]"
+  - "[[../Java EE/2_Tomcat.md|Tomcat]]"
+tags:
+  - SpringMVC
+  - Servlet
+---
+
 # `Spring Web MVC`
 
 ## `MVC`架构模式与前端控制器设计模式
