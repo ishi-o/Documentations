@@ -57,6 +57,12 @@
   - `Bean`的生命周期行为(以回调形式存在)
   - `Bean`的懒加载、协作者等其它元数据
 - `ApplicationContext`：应用上下文接口的实例表示一个`IoC`容器，它会自动创建、配置、组装所有的`Bean`
+
+  这里的自动配置，指的是`IoC`容器能够自动将在它管理范围之内的`Bean`注入到其它需要这个`Bean`的`Bean`里，也就是说`IoC`容器无法管理不是`Bean`的类和实例
+
+  使用注解帮助配置时，只要能理解这一点就不会搞混了(只有被`@Component`或其它衍生的`Bean`的注解修饰时，这个类才可以注入其它`Bean`或被其它`Bean`注入)
+
+  在一些地方，这个性质看起来会被消除，例如`Spring MVC`就实现了一个`HandlerMethodArgumentResolver`，实现了将非`Bean`“注入”方法参数的效果，但这和`Bean`的注入有本质区别，因为它不经过`IoC`容器，而是从请求、`Session`或种种地方动态地获取参数并交由`Spring`的或其它第三方库(`Hibernate`、`Jackson`)的解析器来实现类型转换
   - 继承`BeanFactory`接口：该接口提供一系列和`Bean`有关的方法
 
     `T getBean(String name, Class<T> clazz)`：获取它管理的类型为`T`、名字为`name`的`Bean`

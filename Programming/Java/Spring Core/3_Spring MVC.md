@@ -141,7 +141,7 @@ tags:
 
 ### 拦截链
 
-- 就像`Jakarta EE`的`Filter`那样，`DispatcherServlet`在找到对应的处理器后，调用之前会先调用拦截器链
+- 就像`Jakarta EE`的`Filter`那样，`DispatcherServlet`在找到对应的处理器后，调用之前会先调用拦截器链，只不过时机不同，`Filter`链在调用`DispathcerServlet`之前进行，拦截器链在`DispathcerServlet`之后进行
 - 拦截器需要实现`HandlerInterceptor`接口，包含三个方法，它们会作为回调函数被观察者调用
   - `preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)`：调用处理器之前的拦截点，通常进行日志记录、身份验证
   - `postHandle(HttpServletRequest req, HttpServletResponse resp, Object handler, ModelAndView modelAndView)`：成功调用处理器之后，视图渲染之前的拦截点，通常用于添加视图的全局配置
