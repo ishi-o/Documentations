@@ -157,16 +157,30 @@ related:
 - `EL`表达式的隐含对象
   - `PageContext pageContext`：除它之外，以下所有**都是`Map`**
   - `param`：对应`request`的参数表
-  - `paramValues`：对应`request`的参数表，只不过值是数组用于存储含多个值的参数
+
+    `param.xxx`等价于`param["xxx"]`和`request.getParameter("xxx")`
+  - `paramValues`：对应`request`的参数表，只不过值是数组用于存储含多个值的参数，是`request.getParameterMap()`
+
+    `paramValues.xxx`等价于`paramValues["xxx"]`和`request.getParameterValues("xxx")`
   - `header`：对应`request`的请求头表
+
+    `header.xxx`等价于`header["xxx"]`和`request.getHeader("xxx")`
   - `headerValues`：对应`request`的请求头表，只不过值是数组用于存储含多个值的请求头
+
+    `headerValues.xxx`等价于`headerValues["xxx"]`
   - `cookie`：对应`cookie`表
   - `initParam`：对应`ServletConfig`的初始参数表
+  
+    `initParam.xxx`等价于`initParam["xxx"]`和`config.getInitParameter("xxx")`
   - `pageScope`：页面作用域，可通过它访问所有在页面内定义的标识符
+
+    `pageScope.xxx`等价于`pageScope["xxx"]`和`pageContext.getAttribute("xxx")`，但针对不存在的值会返回空串而不是`null`
   - `requestScope`：请求作用域，可通过它访问所有在`request`中定义的`attribute`
   - `sessionScope`：会话作用域，可通过它访问所有在`session`中定义的`attribute`
   - `applicationScope`：应用作用域
   - `EL`表达式可以不指定隐含对象地输出字段，此时会从小到大(`pageScope->requestScope->sessionScope->applicationScope`)地查找该字段
+
+    如果均不存在，则返回**空串**
 - `EL`表达式的关键字：`not、le、lt、ge、gt、eq、ne、div`等
 - `Jsp`动作：
   - `<jsp:useBean id="a" class="com.Clazz" scope="page|request|session|application"/>`
