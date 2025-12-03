@@ -59,7 +59,9 @@
 - `wsl -l -v`/`wsl --list --verbose`：查看已安装的虚拟机实例的状态
 - `wsl --set-default <Distro-name>`：设置指定的虚拟机实例为默认虚拟机
 - `wsl`：启动并进入默认虚拟机实例
+- `wsl --shutdown`：关闭所有虚拟机
+- `wsl --unregister <Distro-name>`：删除虚拟机实例
 - `wsl -d <Distro-name>`：启动并进入指定虚拟机实例
 - `wsl <command> [-d <Distro-name>]`：在虚拟机实例中执行指定的命令(执行结束后退出)
 - `wsl --export <Distro-name> <Filename>`：导出指定发行版为指定的文件
-- `wsl --import <Filename> <Distro-name>`：导入指定的归档文件为指定名称的虚拟机实例
+- `wsl --import <Distro-name> <InstallDir> <Filename>`：导入指定的归档文件为指定名称的虚拟机实例，其中`InstallDir`为该虚拟机所挂载的目录
