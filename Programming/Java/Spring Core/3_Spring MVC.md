@@ -141,7 +141,7 @@ tags:
 
 ### 拦截链
 
-- 就像`Jakarta EE`的`Filter`那样，`DispatcherServlet`在找到对应的处理器后，调用之前会先调用拦截器链
+- 就像`Jakarta EE`的`Filter`那样，`DispatcherServlet`在找到对应的处理器后，调用之前会先调用拦截器链，只不过时机不同，`Filter`链在调用`DispathcerServlet`之前进行，拦截器链在`DispathcerServlet`之后进行
 - 拦截器需要实现`HandlerInterceptor`接口，包含三个方法，它们会作为回调函数被观察者调用
   - `preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)`：调用处理器之前的拦截点，通常进行日志记录、身份验证
   - `postHandle(HttpServletRequest req, HttpServletResponse resp, Object handler, ModelAndView modelAndView)`：成功调用处理器之后，视图渲染之前的拦截点，通常用于添加视图的全局配置
@@ -222,7 +222,7 @@ tags:
 
 - `@ResponseBody`类/方法级注解，注解类时表示该类的所有方法的返回值不应经过`ViewResolver`，而是作为响应体返回；注解方法时只表示该特定方法的返回值不经过`ViewResolver`
 - `@Controller`类级注解：标识该类是传统的控制器类，通常作为页面控制器而存在，虽然返回值允许多个类型，但期望返回`String`，表示视图类型，然后`ViewResolver`会解析它为视图
-- `@RestController`类级注解：标识该类是现代的前后端分离的控制器类，通常作为数据接口，即`API`控制器而存在，期望返回`ResponseEntity<T>`或其它类型，表示数据
+- `@RestController`类级注解：标识该类是现代的前后端分离的控制器类，通常作为数据接口而存在，期望纯粹的数据
 
   `@RestController`本质是`@Controller`加上`@ResponseBody`注解，后者表示该类的方法返回的是数据本身而不是一个视图，不应经过`ViewResolver`解析
 - `@ControllerAdvice`类级注解：表示该类中定义的`ExceptionHandler`方法会应用于全局的`Controller`类
@@ -282,7 +282,9 @@ tags:
 
 ### 返回值类型
 
-- `ResponseEntity<T>`：完整的由开发者决定的响应体
+- `ResponseEntity<T>`：完整的由开发者决定的响应体，它的自由度极高但可能导致代码冗长、性能不佳
+
+  实践时在大多数情况使用自定义的公共返回值`ApiResponse<T>`，内容可以是自定义的`Dto`
   - 调用一个指定了状态码的静态方法，创建一个`ResponseEntity.BodyBuilder`或`ResponseEntity.HeadersBuilder`创建者：
 
     `status(HttpStatusCode)`：指定任意状态码，创建一个响应报文
@@ -309,6 +311,7 @@ tags:
     `contentLength(long)`：设置响应体大小
 
     `body(T)`：设置响应体，会自动由`Converter`序列化
+- `@ResponseStatus`：当我们希望使用默认的`@ResponseBody`的响应报文而又希望返回其它状态码时使用
 - `void`：方法参数必须包含输出流或`ServletResponse`，此时表示`Spring`认为请求在该方法内部完成了处理，返回值为`void`
 - `@ModelAttribute`：它在修饰参数时表示获取，而在修饰方法时表示方法的返回值会添加到该请求的`Model`里而不是返回
 - `String`、`View`、`ModelAndView`：返回字符串表示的视图、自己创建的视图、绑定了一些属性的视图
@@ -321,6 +324,7 @@ tags:
 - `@ExceptionHandler`允许设置一系列异常类的`class`属性，表示只会接受这些类型的异常
 - 在`@Controller`类、`@RestController`类中定义的异常处理器只作用于其所在类的其它方法抛出的异常
 - 在`@ControllerAdvice`类、`@RestControllerAdvice`类中定义的异常处理器作用于所有的`Controller`类
+- 这样的异常处理可以简化控制层代码，删除所有的重复`try-catch`
 
 ## 其它工具类
 

@@ -43,6 +43,11 @@ related:
 - `BindingResult`继承了`Errors`接口
 - `Object getTarget()`：获取发生错误的目标对象
 
+### `MethodArgumentNotValidException`异常
+
+- 当配合`Spring`在方法中使用`@Valid`自动检查，并抛出异常时，异常类型为`MethodArgumentNotValidException`
+- 该异常的常用方法为`getBindingResult()`，即获取其中的`BindingResult`实例
+
 ## 集成`Bean Validation API`
 
 - `Spring`使用适配器模式将`Spring Validation`与`Bean Validation API`集成起来
